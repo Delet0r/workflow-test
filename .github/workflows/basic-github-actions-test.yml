@@ -21,6 +21,15 @@ jobs:
           echo "Runner OS: ${{ runner.os }}"
           echo "Branch: ${{ github.ref }}"
 
+      # Enables multi-platform support in docker
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.1.0
+      - name: Check install!
+        run: cosign version
+
       # Necessary to support subdirs in context of `Build and push Docker image` step
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
